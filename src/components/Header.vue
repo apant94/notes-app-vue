@@ -4,6 +4,11 @@ import { RouterLink } from 'vue-router'
 
 export default {
   name: 'HeaderItem',
+  methods: {
+    showForm() {
+      
+    }
+  },
 }
 </script>
 
@@ -13,7 +18,7 @@ export default {
       <img src="../assets/logo.svg" class="header__icon" />
       <h1 class="header__title">Заметочки</h1>
     </RouterLink>
-    <button class="header__btn">
+    <button class="header__btn" @click="showForm">
       <span><svg viewBox="0 0 512 512">
           <path
             d="M480 224H288V32c0-17.673-14.327-32-32-32s-32 14.327-32 32v192H32c-17.673 0-32 14.327-32 32s14.327 32 32 32h192v192c0 17.673 14.327 32 32 32s32-14.327 32-32V288h192c17.673 0 32-14.327 32-32s-14.327-32-32-32z">
@@ -83,12 +88,16 @@ export default {
     padding: 0;
 
     &:hover span:first-of-type {
-      background-color: var(--color-text);
+      background-color: var(--color-heading);
       color: var(--color-background);
 
       & svg {
         fill: var(--color-background);
       }
+    }
+
+    &:active span:first-of-type {
+      transform: translate(1.2rem,1.2rem);
     }
 
     & span {
