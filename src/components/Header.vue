@@ -1,12 +1,13 @@
 <script lang="ts">
 
 import { RouterLink } from 'vue-router'
-
 export default {
   name: 'HeaderItem',
   methods: {
     showForm() {
-      
+      console.log(this.$store.state.visibleForm)
+      this.$store.commit("noteIsNew", true);
+			this.$store.commit("visibleForm", true);
     }
   },
 }
