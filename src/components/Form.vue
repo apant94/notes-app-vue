@@ -10,6 +10,24 @@ export default {
   methods: {
     hideForm() {
       this.$store.commit("visibleForm", false);
+    },
+    clearForm() {
+      this.title = '';
+      this.text = '';
+    },
+    addNote() {
+      const newNote = { title: this.title, text: this.text }
+
+      fetch("https://6536b157bb226bb85dd28259.mockapi.io/api/v1/notes", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newNote)
+      })
+        .then((res) => res.json())
+        .then((data) => this.$store.commit("addNote", data))
+        .catch((err) => console.log(err.message));
+      this.hideForm();
+      this.clearForm();
     }
   },
 }
@@ -17,7 +35,7 @@ export default {
 
 <template>
   <div class="layout" v-if="this.$store.state.visibleForm">
-    <form class="form">
+    <form class="form" @submit.prevent="addNote">
       <div class="form__close" @click="hideForm">
         <svg class="form__close-fill" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 50 50">
           <path
@@ -26,9 +44,9 @@ export default {
         </svg>
       </div>
       <h2 class="form__title">Создать заметочку</h2>
-      <input type="text" class="form__input-title" v-model="title">
-      <textarea name="text" class="form__input-text" v-model="text"></textarea>
-      <button type="submit" class="form__btn">Оки</button>
+      <input type="text" class="form__input-title" v-model="title" placeholder="заголовок">
+      <textarea name="text" class="form__input-text" v-model="text" placeholder="заметка"></textarea>
+      <button type="submit" class="form__btn" :disabled="text === '' || title === ''">Оки</button>
     </form>
   </div>
 </template>
@@ -103,6 +121,10 @@ export default {
     font-size: 1rem;
     margin: 0;
 
+    &::placeholder {
+      opacity: .8;
+    }
+
     @media screen and (max-width: 768px) {
       font-size: .7rem;
     }
@@ -117,6 +139,23 @@ export default {
     color: var(--color-text);
     border: 1px solid var(--color-green);
     border-radius: 4px;
+    font-family:
+      'OpenSans',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      sans-serif;
+
+    &::placeholder {
+      opacity: .8;
+    }
 
     @media screen and (max-width: 768px) {
       font-size: 1rem;
@@ -133,6 +172,19 @@ export default {
     color: var(--color-text);
     border: 1px solid var(--color-green);
     border-radius: 4px;
+    font-family:
+      'OpenSans',
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Fira Sans',
+      'Droid Sans',
+      'Helvetica Neue',
+      sans-serif;
 
     @media screen and (max-width: 768px) {
       font-size: 1rem;

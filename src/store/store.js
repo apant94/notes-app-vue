@@ -5,16 +5,16 @@ export const store = createStore({
   state() {
     return {
       userNotes: [],
+      visibleForm: false,
       // favouriteNotes: [],
       // trashedNotes: [],
-      isNoteEmpty: true,
-      isNoteNew: true,
-      visibleForm: false,
-      noteId: '',
-      noteTitle: '',
-      noteText: '',
+      // isNoteEmpty: true,
+      // isNoteNew: true,
+      // noteId: '',
+      // noteTitle: '',
+      // noteText: '',
       // noteImages: [],
-      noteTheme: 'dark'
+      // noteTheme: 'dark'
       // noteFont: "glacial",
       // noteIsFavourite: false
     }
@@ -22,28 +22,37 @@ export const store = createStore({
 
   mutations: {
 		getNotes(state, payload) {
-      state.userNotes = payload;
+      state.userNotes = payload.reverse();
+    },
+
+    addNote(state, payload) {
+      state.userNotes.unshift(payload);
+    },
+
+    deleteNote(state, payload) {
+      state.userNotes.splice(0, state.userNotes.length, ...state.userNotes.filter(note => note.id !== payload));
+      console.log(state.userNotes);
     },
 
     visibleForm(state, payload) {
       state.visibleForm = payload
     },
 
-    noteIsEmpty(state, payload) {
-      state.isNoteEmpty = payload
-    },
+    // noteIsEmpty(state, payload) {
+    //   state.isNoteEmpty = payload
+    // },
 
-    noteIsNew(state, payload) {
-      state.isNoteNew = payload
-    },
+    // noteIsNew(state, payload) {
+    //   state.isNoteNew = payload
+    // },
 
-    setNoteTitle(state, payload) {
-      state.noteTitle = payload
-    },
+    // setNoteTitle(state, payload) {
+    //   state.noteTitle = payload
+    // },
 
-    setNoteText(state, payload) {
-      state.noteText = payload
-    },
+    // setNoteText(state, payload) {
+    //   state.noteText = payload
+    // },
 
     // addNoteImages(state, payload) {
     //   state.noteImages.push(payload)
@@ -153,51 +162,51 @@ export const store = createStore({
     // }
   },
 
-  actions: {
-    moveToTrash({ state, commit }) {
-      if (state.isNoteNew) {
-        commit('createOrTrash', 'trash')
-        commit('resetNote')
-      } else {
-        commit('updateNote')
-        commit('trashNote')
-      }
+  // actions: {
+  //   moveToTrash({ state, commit }) {
+  //     if (state.isNoteNew) {
+  //       commit('createOrTrash', 'trash')
+  //       commit('resetNote')
+  //     } else {
+  //       commit('updateNote')
+  //       commit('trashNote')
+  //     }
 
-      commit('resetNote')
-      commit('visibleForm', false)
-    },
+  //     commit('resetNote')
+  //     commit('visibleForm', false)
+  //   },
 
-    restoreFromTrash({ commit }) {
-      commit('restoreNote')
-      commit('resetNote')
-      commit('visibleForm', false)
-      commit('addFavouriteNotes')
-    },
+  //   restoreFromTrash({ commit }) {
+  //     commit('restoreNote')
+  //     commit('resetNote')
+  //     commit('visibleForm', false)
+  //     commit('addFavouriteNotes')
+  //   },
 
-    exitNote({ state, commit }, page) {
-      if (page !== 'trash') {
-        if (!state.isNoteEmpty) {
-          if (state.isNoteNew) {
-            commit('createOrTrash', 'create')
-          } else {
-            commit('updateNote')
-          }
-          commit('addFavouriteNotes')
-        } else {
-          if (!state.isNoteNew) {
-            commit('removeEmptyNote')
-            commit('addFavouriteNotes')
-          }
-        }
-      }
+  //   exitNote({ state, commit }, page) {
+  //     if (page !== 'trash') {
+  //       if (!state.isNoteEmpty) {
+  //         if (state.isNoteNew) {
+  //           commit('createOrTrash', 'create')
+  //         } else {
+  //           commit('updateNote')
+  //         }
+  //         commit('addFavouriteNotes')
+  //       } else {
+  //         if (!state.isNoteNew) {
+  //           commit('removeEmptyNote')
+  //           commit('addFavouriteNotes')
+  //         }
+  //       }
+  //     }
 
-      commit('resetNote')
-      commit('visibleForm', false)
-    },
+  //     commit('resetNote')
+  //     commit('visibleForm', false)
+  //   },
 
-    emptyTrash({ commit }, payload) {
-      commit('deleteNotes', payload)
-      commit('resetNote')
-    }
-  }
+  //   emptyTrash({ commit }, payload) {
+  //     commit('deleteNotes', payload)
+  //     commit('resetNote')
+  //   }
+  // }
 })
