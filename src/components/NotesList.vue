@@ -67,8 +67,7 @@ export default defineComponent({
   }
 
   @media screen and (max-width: 768px) {
-    gap: 1rem;
-    height: 78vh;
+    gap: 1rem 3.3%;
   }
 }
 
