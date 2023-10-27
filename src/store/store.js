@@ -21,6 +21,10 @@ export const store = createStore({
   },
 
   mutations: {
+		getNotes(state, payload) {
+      state.userNotes = payload;
+    },
+
     visibleForm(state, payload) {
       state.visibleForm = payload
     },
