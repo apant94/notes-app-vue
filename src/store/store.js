@@ -22,7 +22,11 @@ export const store = createStore({
 
   mutations: {
 		getNotes(state, payload) {
-      state.userNotes = payload;
+      state.userNotes = payload.reverse();
+    },
+
+    addNote(state, payload) {
+      state.userNotes.unshift(payload);
     },
 
     visibleForm(state, payload) {

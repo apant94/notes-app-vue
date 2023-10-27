@@ -6,7 +6,7 @@ export default {
   methods: {
     showForm() {
       this.$store.commit("noteIsNew", true);
-			this.$store.commit("visibleForm", true);
+      this.$store.commit("visibleForm", true);
     }
   },
 }
@@ -97,7 +97,7 @@ export default {
     }
 
     &:active span:first-of-type {
-      transform: translate(1.2rem,1.2rem);
+      transform: translate(1.2rem, 1.2rem);
     }
 
     & span {
@@ -112,6 +112,7 @@ export default {
 
       @media screen and (max-width: 768px) {
         width: 8rem;
+        height: 2.5rem;
       }
     }
 
@@ -129,8 +130,8 @@ export default {
 
       @media screen and (max-width: 768px) {
         font-size: 1rem;
-        right: .5rem;
-        top: -0.5rem
+        right: 1rem;
+        top: 0rem
       }
 
       & svg {
@@ -140,7 +141,7 @@ export default {
 
         @media screen and (max-width: 768px) {
           height: .8rem;
-      }
+        }
       }
     }
 
@@ -150,8 +151,8 @@ export default {
       z-index: 2;
 
       @media screen and (max-width: 768px) {
-        right: 0;
-        top: 0;
+        right: 0.5rem;
+        top: 0.5rem;
       }
     }
 
@@ -161,8 +162,8 @@ export default {
       z-index: 1;
 
       @media screen and (max-width: 768px) {
-        right: -0.5rem;
-        top: .5rem;
+        right: 0;
+        top: 1rem;
       }
     }
   }

@@ -1,5 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
+import TrashNote from './icons/TrashNote.vue';
 
 interface Note {
   title: string,
@@ -12,7 +13,7 @@ export default defineComponent({
   data() {
     return {
       notes: [] as Array<Note>,
-    }
+    };
   },
   mounted() {
     fetch("https://6536b157bb226bb85dd28259.mockapi.io/api/v1/notes")
@@ -26,6 +27,7 @@ export default defineComponent({
       return this.$store.state.userNotes;
     },
   },
+  components: { TrashNote }
 })
 </script>
 
@@ -34,6 +36,9 @@ export default defineComponent({
     <li v-for="note in notesFromStore" v-bind:key="note.id" class="note">
       <h3 class="note__title">{{ note.title }}</h3>
       <p class="note__text">{{ note.text }}</p>
+      <button class="note__trash">
+        <TrashNote />
+      </button>
     </li>
   </ul>
 </template>
@@ -64,10 +69,14 @@ export default defineComponent({
   gap: 1rem;
   width: 31%;
   border-radius: 10px;
+  position: relative;
 
   &__title {
     color: var(--color-heading);
     font-size: 2rem;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &__text {
@@ -79,6 +88,23 @@ export default defineComponent({
     text-overflow: ellipsis;
     color: var(--color-text);
     height: 10rem;
+  }
+
+  &__trash {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    background-color: transparent;
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    padding: 0;
+    cursor: pointer;
+    transition: transform .2s linear;
+
+    &:hover {
+      transform: scale(.8);
+    }
   }
 }
 </style>

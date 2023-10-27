@@ -5,6 +5,8 @@ declare module '@vue/runtime-core' {
     title: string,
     text: string,
     id: number,
+    createdAt: string,
+    isLiked: boolean,
   }
   // declare your own store states
   interface State {
