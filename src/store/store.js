@@ -1,191 +1,199 @@
-import { createStore } from "vuex";
+import { createStore } from 'vuex'
 
 export const store = createStore({
-	strict: true,
-	state() {
-		return {
-			userNotes: [],
-			favouriteNotes: [],
-			trashedNotes: [],
-			isNoteEmpty: true,
-			isNoteNew: true,
-			visibleForm: false,
-			noteId: "",
-			noteTitle: "",
-			noteText: "",
-			noteImages: [],
-			noteTheme: "dark",
-			noteFont: "glacial",
-			noteIsFavourite: false
-		}
-	},
+  strict: true,
+  state() {
+    return {
+      userNotes: [],
+      // favouriteNotes: [],
+      // trashedNotes: [],
+      isNoteEmpty: true,
+      isNoteNew: true,
+      visibleForm: false,
+      noteId: '',
+      noteTitle: '',
+      noteText: '',
+      // noteImages: [],
+      noteTheme: 'dark'
+      // noteFont: "glacial",
+      // noteIsFavourite: false
+    }
+  },
 
-	mutations: {
-		visibleForm(state, payload) {
-			state.visibleForm = payload;
-		},
+  mutations: {
+    visibleForm(state, payload) {
+      state.visibleForm = payload
+    },
 
-		noteIsEmpty(state, payload) {
-			state.isNoteEmpty = payload;
-		},
+    noteIsEmpty(state, payload) {
+      state.isNoteEmpty = payload
+    },
 
-		noteIsNew(state, payload) {
-			state.isNoteNew = payload;
-		},
-		
-		setNoteTitle(state, payload) {
-			state.noteTitle = payload;
-		},
+    noteIsNew(state, payload) {
+      state.isNoteNew = payload
+    },
 
-		setNoteText(state, payload) {
-			state.noteText = payload;
-		},
+    setNoteTitle(state, payload) {
+      state.noteTitle = payload
+    },
 
-		addNoteImages(state, payload) {
-			state.noteImages.push(payload);
-		},
+    setNoteText(state, payload) {
+      state.noteText = payload
+    },
 
-		setNoteTheme(state, payload) {
-			state.noteTheme = payload;
-		},
+    // addNoteImages(state, payload) {
+    //   state.noteImages.push(payload)
+    // },
 
-		setNoteFont(state, payload) {
-			state.noteFont = payload;
-		},
+    // setNoteTheme(state, payload) {
+    //   state.noteTheme = payload
+    // },
 
-		toggleFavourite(state) {
-			state.noteIsFavourite = !state.noteIsFavourite;
-		},
+    // setNoteFont(state, payload) {
+    //   state.noteFont = payload
+    // },
 
-		createOrTrash(state, payload) {
-			const newNote = {
-				id: new Date().toISOString(),
-				title: state.noteTitle.trim(),
-				text: state.noteText,
-				images: state.noteImages,
-				theme: state.noteTheme,
-				font: state.noteFont,
-				favourite: state.noteIsFavourite
-			}
+    // toggleFavourite(state) {
+    //   state.noteIsFavourite = !state.noteIsFavourite
+    // },
 
-			if (payload === "create") {
-				state.userNotes.unshift(newNote);
-			} else if(payload === "trash"){
-				state.trashedNotes.unshift(newNote);
-			}
-		},
+    // createOrTrash(state, payload) {
+    // 	const newNote = {
+    // 		id: new Date().toISOString(),
+    // 		title: state.noteTitle.trim(),
+    // 		text: state.noteText,
+    // 		images: state.noteImages,
+    // 		theme: state.noteTheme,
+    // 		font: state.noteFont,
+    // 		favourite: state.noteIsFavourite
+    // 	}
 
-		editNote(state, payload) {
-			state.noteId = payload.id;
-			state.noteTitle = payload.title;
-			state.noteText = payload.text;
-			state.noteImages = payload.images;
-			state.noteTheme = payload.theme;
-			state.noteFont = payload.font;
-			state.noteIsFavourite = payload.favourite;
-		},
+    // 	if (payload === "create") {
+    // 		state.userNotes.unshift(newNote);
+    // 	} else if(payload === "trash"){
+    // 		state.trashedNotes.unshift(newNote);
+    // 	}
+    // },
 
-		// updateNote(state) {
-		// 	const noteToUpdate = findNote(state.userNotes, state.noteId);
-		// 	Object.assign(noteToUpdate, {
-		// 		title: state.noteTitle.trim(),
-		// 		text: state.noteText,
-		// 		images: state.noteImages,
-		// 		theme: state.noteTheme,
-		// 		font: state.noteFont,
-		// 		favourite: state.noteIsFavourite
-		// 	});
-		// },
+    createNote(state, payload) {
+      const newNote = {
+        title: state.noteTitle,
+        text: state.noteText
+      }
+      state.userNotes.unshift(newNote)
+    },
 
-		resetNote(state) {
-			state.noteId = "";
-			state.noteTitle = "";
-			state.noteText = "";
-			state.noteImages = [];
-			state.noteTheme = "dark";
-			state.noteFont = "glacial";
-			state.noteIsFavourite = false;
-		},
+    editNote(state, payload) {
+      state.noteId = payload.id
+      state.noteTitle = payload.title
+      state.noteText = payload.text
+      state.noteImages = payload.images
+      state.noteTheme = payload.theme
+      state.noteFont = payload.font
+      state.noteIsFavourite = payload.favourite
+    },
 
-		// trashNote(state) {
-		// 	const noteToTrash = findNote(state.userNotes, state.noteId);
-		// 	state.trashedNotes.unshift(noteToTrash);
-		// 	state.userNotes = filterNotes(state.userNotes, noteToTrash.id);
-		// 	state.favouriteNotes = state.userNotes.filter(note => note.favourite);
-		// },
+    // updateNote(state) {
+    // 	const noteToUpdate = findNote(state.userNotes, state.noteId);
+    // 	Object.assign(noteToUpdate, {
+    // 		title: state.noteTitle.trim(),
+    // 		text: state.noteText,
+    // 		images: state.noteImages,
+    // 		theme: state.noteTheme,
+    // 		font: state.noteFont,
+    // 		favourite: state.noteIsFavourite
+    // 	});
+    // },
 
-		// restoreNote(state) {
-		// 	const noteToRestore = findNote(state.trashedNotes, state.noteId);
-		// 	state.userNotes.unshift(noteToRestore);
-		// 	state.trashedNotes = filterNotes(state.trashedNotes, noteToRestore.id);
-		// },
+    resetNote(state) {
+      state.noteId = ''
+      state.noteTitle = ''
+      state.noteText = ''
+      state.noteImages = []
+      state.noteTheme = 'dark'
+      state.noteFont = 'glacial'
+      state.noteIsFavourite = false
+    },
 
-		// removeEmptyNote(state) {
-		// 	state.userNotes = filterNotes(state.userNotes, state.noteId);
-		// },
+    // trashNote(state) {
+    // 	const noteToTrash = findNote(state.userNotes, state.noteId);
+    // 	state.trashedNotes.unshift(noteToTrash);
+    // 	state.userNotes = filterNotes(state.userNotes, noteToTrash.id);
+    // 	state.favouriteNotes = state.userNotes.filter(note => note.favourite);
+    // },
 
-		// deleteNoteImages(state, payload) {
-		// 	state.noteImages.splice(payload, 1);
-		// },
+    // restoreNote(state) {
+    // 	const noteToRestore = findNote(state.trashedNotes, state.noteId);
+    // 	state.userNotes.unshift(noteToRestore);
+    // 	state.trashedNotes = filterNotes(state.trashedNotes, noteToRestore.id);
+    // },
 
-		// deleteNotes(state, payload) {
-		// 	if (payload === "one") {
-		// 		state.trashedNotes = filterNotes(state.trashedNotes, state.noteId);
-		// 	} else if (payload === "all") {
-		// 		state.trashedNotes = [];
-		// 	}
-		// },
+    // removeEmptyNote(state) {
+    // 	state.userNotes = filterNotes(state.userNotes, state.noteId);
+    // },
 
-		addFavouriteNotes(state) {
-			state.favouriteNotes = state.userNotes.filter(note => note.favourite);
-		}
-	},
+    // deleteNoteImages(state, payload) {
+    // 	state.noteImages.splice(payload, 1);
+    // },
 
-	actions: {
-		moveToTrash({state, commit}) {
-			if (state.isNoteNew) {
-				commit("createOrTrash", "trash");
-				commit("resetNote");
-			} else {
-				commit("updateNote");
-				commit("trashNote");
-			}
+    // deleteNotes(state, payload) {
+    // 	if (payload === "one") {
+    // 		state.trashedNotes = filterNotes(state.trashedNotes, state.noteId);
+    // 	} else if (payload === "all") {
+    // 		state.trashedNotes = [];
+    // 	}
+    // },
 
-			commit("resetNote");
-			commit("noteDialogIsVisible", false);
-		},
+    // addFavouriteNotes(state) {
+    //   state.favouriteNotes = state.userNotes.filter((note) => note.favourite)
+    // }
+  },
 
-		restoreFromTrash({commit}) {
-			commit("restoreNote");
-			commit("resetNote");
-			commit("noteDialogIsVisible", false);
-			commit("addFavouriteNotes");
-		},
+  actions: {
+    moveToTrash({ state, commit }) {
+      if (state.isNoteNew) {
+        commit('createOrTrash', 'trash')
+        commit('resetNote')
+      } else {
+        commit('updateNote')
+        commit('trashNote')
+      }
 
-		exitNote({state, commit}, page) {
-			if (page !== "trash") {
-				if (!state.isNoteEmpty) {
-					if (state.isNoteNew) {
-						commit("createOrTrash", "create");
-					} else {
-						commit("updateNote");
-					}
-					commit("addFavouriteNotes");
-				} else {
-					if (!state.isNoteNew) {
-						commit("removeEmptyNote");
-						commit("addFavouriteNotes");
-					}
-				}
-			}
+      commit('resetNote')
+      commit('visibleForm', false)
+    },
 
-			commit("resetNote");
-			commit("noteDialogIsVisible", false);
-		},
+    restoreFromTrash({ commit }) {
+      commit('restoreNote')
+      commit('resetNote')
+      commit('visibleForm', false)
+      commit('addFavouriteNotes')
+    },
 
-		emptyTrash({commit}, payload) {
-			commit("deleteNotes", payload);
-			commit("resetNote");
-		}
-	}
+    exitNote({ state, commit }, page) {
+      if (page !== 'trash') {
+        if (!state.isNoteEmpty) {
+          if (state.isNoteNew) {
+            commit('createOrTrash', 'create')
+          } else {
+            commit('updateNote')
+          }
+          commit('addFavouriteNotes')
+        } else {
+          if (!state.isNoteNew) {
+            commit('removeEmptyNote')
+            commit('addFavouriteNotes')
+          }
+        }
+      }
+
+      commit('resetNote')
+      commit('visibleForm', false)
+    },
+
+    emptyTrash({ commit }, payload) {
+      commit('deleteNotes', payload)
+      commit('resetNote')
+    }
+  }
 })
