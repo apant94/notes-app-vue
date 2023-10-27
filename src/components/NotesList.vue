@@ -27,6 +27,14 @@ export default defineComponent({
       return this.$store.state.userNotes;
     },
   },
+  methods: {
+    deleteNote(id: number) {
+      fetch(`https://6536b157bb226bb85dd28259.mockapi.io/api/v1/notes/${id}`, { method: 'DELETE' })
+      .then((res) => res.json())
+      .then(data => this.$store.commit("deleteNote", data.id))
+      .catch((err) => console.log(err.message));
+    },
+  },
   components: { TrashNote }
 })
 </script>
@@ -36,7 +44,7 @@ export default defineComponent({
     <li v-for="note in notesFromStore" v-bind:key="note.id" class="note">
       <h3 class="note__title">{{ note.title }}</h3>
       <p class="note__text">{{ note.text }}</p>
-      <button class="note__trash">
+      <button class="note__trash" @click="deleteNote(note.id)">
         <TrashNote />
       </button>
     </li>
@@ -57,6 +65,11 @@ export default defineComponent({
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media screen and (max-width: 768px) {
+    gap: 1rem;
+    height: 78vh;
+  }
 }
 
 .note {
@@ -71,12 +84,24 @@ export default defineComponent({
   border-radius: 10px;
   position: relative;
 
+  @media screen and (max-width: 768px) {
+    width: 48%;
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 100%;
+  }
+
   &__title {
     color: var(--color-heading);
     font-size: 2rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+
+    @media screen and (max-width: 768px) {
+      font-size: 1rem;
+    }
   }
 
   &__text {
@@ -88,6 +113,11 @@ export default defineComponent({
     text-overflow: ellipsis;
     color: var(--color-text);
     height: 10rem;
+
+    @media screen and (max-width: 768px) {
+      font-size: 1rem;
+      height: 6.7rem;
+    }
   }
 
   &__trash {
@@ -101,6 +131,11 @@ export default defineComponent({
     padding: 0;
     cursor: pointer;
     transition: transform .2s linear;
+
+    @media screen and (max-width: 768px) {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
 
     &:hover {
       transform: scale(.8);
