@@ -62,6 +62,16 @@ export default {
   gap: 2rem;
   border: 1px solid var(--color-text);
 
+  @media screen and (max-width: 1024px) {
+    width: 50%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: calc(100% - 4rem);
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
   &__close {
     position: absolute;
     top: 1rem;
@@ -72,14 +82,19 @@ export default {
     height: 2rem;
 
     &:hover {
-    transform: rotate(180deg);
-  }
+      transform: rotate(180deg);
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 
   &__close-fill {
     fill: var(--color-text);
-    height: 2rem;
-    width: 2rem;
+    height: 100%;
+    width: 100%;
   }
 
   &__title {
@@ -87,6 +102,10 @@ export default {
     font-family: 'PressStart2P', Arial, Helvetica, sans-serif;
     font-size: 1rem;
     margin: 0;
+
+    @media screen and (max-width: 768px) {
+      font-size: .7rem;
+    }
   }
 
   &__input-title {
@@ -98,6 +117,11 @@ export default {
     color: var(--color-text);
     border: 1px solid var(--color-green);
     border-radius: 4px;
+
+    @media screen and (max-width: 768px) {
+      font-size: 1rem;
+      height: 2rem;
+    }
   }
 
   &__input-text {
@@ -109,6 +133,10 @@ export default {
     color: var(--color-text);
     border: 1px solid var(--color-green);
     border-radius: 4px;
+
+    @media screen and (max-width: 768px) {
+      font-size: 1rem;
+    }
   }
 
   &__btn {
@@ -125,9 +153,20 @@ export default {
     font-size: 1rem;
     font-family: 'PressStart2P', Arial, Helvetica, sans-serif;
 
+    &:active {
+      transform: translate(.5rem, .5rem);
+    }
+
     &:hover {
-      background-color: var(--color-green);
-      opacity: .7;
+      background-color: var(--color-text);
+      border: 1px solid var(--color-background);
+      color: var(--color-background);
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: .7rem;
+      height: 2rem;
+      max-width: 100px;
     }
   }
 }

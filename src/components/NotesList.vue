@@ -37,7 +37,6 @@ export default defineComponent({
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  // width: 90%;
   gap: 2rem 3.3%;
   height: 80vh;
   overflow: auto;
@@ -59,7 +58,6 @@ export default defineComponent({
   gap: 1rem;
   width: 31%;
   border-radius: 10px;
-  // height: 10rem;
 
   &__title {
     color: var(--color-heading);
