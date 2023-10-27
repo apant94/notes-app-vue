@@ -18,11 +18,17 @@ export default {
 <template>
   <div class="layout" v-if="this.$store.state.visibleForm">
     <form class="form">
-      <div class="form__close" @click="hideForm">Х</div>
-      <h2>Создать заметочку</h2>
-      <input type="text" v-model="title">
-      <textarea name="text" v-memo="text"></textarea>
-      <button type="submit">Создать</button>
+      <div class="form__close" @click="hideForm">
+        <svg class="form__close-fill" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 50 50">
+          <path
+            d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z">
+          </path>
+        </svg>
+      </div>
+      <h2 class="form__title">Создать заметочку</h2>
+      <input type="text" class="form__input-title" v-model="title">
+      <textarea name="text" class="form__input-text" v-model="text"></textarea>
+      <button type="submit" class="form__btn">Оки</button>
     </form>
   </div>
 </template>
@@ -40,16 +46,89 @@ export default {
   align-items: center;
   justify-content: center;
   z-index: 4;
-  transition: all .6s linear;
 }
 
 .form {
   display: flex;
+  position: relative;
   flex-direction: column;
-  width: 282px;
-  min-height: 322px;
-  background: #FFFFFF;
-  border-radius: 10px;
+  justify-content: center;
+  padding: 2rem;
+  width: 40%;
+  height: fit-content;
+  background: var(--color-background);
+  border-radius: 6px;
   z-index: 5;
+  gap: 2rem;
+  border: 1px solid var(--color-text);
+
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    transition: all .3s linear;
+    width: 2rem;
+    height: 2rem;
+
+    &:hover {
+    transform: rotate(180deg);
+  }
+  }
+
+  &__close-fill {
+    fill: var(--color-text);
+    height: 2rem;
+    width: 2rem;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    font-family: 'PressStart2P', Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    margin: 0;
+  }
+
+  &__input-title {
+    height: 3rem;
+    width: 100%;
+    padding: .5rem;
+    font-size: 1.5rem;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border: 1px solid var(--color-green);
+    border-radius: 4px;
+  }
+
+  &__input-text {
+    height: 10rem;
+    width: 100%;
+    padding: .5rem;
+    font-size: 1.5rem;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border: 1px solid var(--color-green);
+    border-radius: 4px;
+  }
+
+  &__btn {
+    height: 3rem;
+    border: 1px solid var(--color-text);
+    border-radius: 4px;
+    max-width: 200px;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .2s linear;
+    padding: 0;
+    font-size: 1rem;
+    font-family: 'PressStart2P', Arial, Helvetica, sans-serif;
+
+    &:hover {
+      background-color: var(--color-green);
+      opacity: .7;
+    }
+  }
 }
 </style>
