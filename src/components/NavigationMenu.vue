@@ -6,6 +6,6 @@ export default {
 
 <template>
   <nav class="navigation">
-    Список навигации - избранное и корзина
+    избранное и корзина
   </nav>
 </template>
