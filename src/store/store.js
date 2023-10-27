@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import { createStore } from '../../node_modules/vuex'
 
 export const store = createStore({
   strict: true,
