@@ -18,14 +18,20 @@ export default defineComponent({
     fetch("https://6536b157bb226bb85dd28259.mockapi.io/api/v1/notes")
       .then((res) => res.json())
       .then((data) => (this.notes = data))
+      .then(() => this.$store.commit("getNotes", this.notes))
       .catch((err) => console.log(err.message));
+  },
+  computed: {
+    notesFromStore(): Array<Note> {
+      return this.$store.state.userNotes;
+    },
   },
 })
 </script>
 
 <template>
   <ul class="notes">
-    <li v-for="note in notes" v-bind:key="note.id" class="note">
+    <li v-for="note in notesFromStore" v-bind:key="note.id" class="note">
       <h3 class="note__title">{{ note.title }}</h3>
       <p class="note__text">{{ note.text }}</p>
     </li>

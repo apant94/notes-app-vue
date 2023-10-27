@@ -1,9 +1,15 @@
-import { Store } from 'vuex'
+import { Store } from '../node_modules/vuex'
 
 declare module '@vue/runtime-core' {
+  interface Note {
+    title: string,
+    text: string,
+    id: number,
+  }
   // declare your own store states
   interface State {
-    count: number
+    userNotes: Array<Note>,
+    visibleForm: boolean,
   }
 
   // provide typings for `this.$store`

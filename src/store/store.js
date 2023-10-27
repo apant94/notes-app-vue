@@ -1,4 +1,4 @@
-import { createStore } from 'vuex'
+import { createStore } from '../../node_modules/vuex'
 
 export const store = createStore({
   strict: true,
@@ -21,6 +21,10 @@ export const store = createStore({
   },
 
   mutations: {
+		getNotes(state, payload) {
+      state.userNotes = payload;
+    },
+
     visibleForm(state, payload) {
       state.visibleForm = payload
     },
