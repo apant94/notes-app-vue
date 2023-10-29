@@ -45,7 +45,7 @@ export default {
     transition: all 0.2s;
 
     &:hover {
-      opacity: .7;
+      animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
     }
   }
 
