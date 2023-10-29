@@ -6,6 +6,7 @@ export const store = createStore({
     return {
       userNotes: [],
       visibleForm: false,
+      visibleNoteItem: false,
       // favouriteNotes: [],
       // trashedNotes: [],
       // isNoteEmpty: true,
@@ -36,6 +37,10 @@ export const store = createStore({
 
     visibleForm(state, payload) {
       state.visibleForm = payload
+    },
+
+    visibleNoteItem(state, payload) {
+      state.visibleNoteItem = payload
     },
 
     // noteIsEmpty(state, payload) {
