@@ -6,7 +6,7 @@ export const store = createStore({
     return {
       userNotes: [],
       visibleForm: false,
-      visibleNoteItem: false,
+      loading: false,
       // favouriteNotes: [],
       // trashedNotes: [],
       // isNoteEmpty: true,
@@ -22,7 +22,7 @@ export const store = createStore({
   },
 
   mutations: {
-		getNotes(state, payload) {
+    getNotes(state, payload) {
       state.userNotes = payload.reverse();
     },
 
@@ -31,16 +31,19 @@ export const store = createStore({
     },
 
     deleteNote(state, payload) {
-      state.userNotes.splice(0, state.userNotes.length, ...state.userNotes.filter(note => note.id !== payload));
-      console.log(state.userNotes);
+      state.userNotes.splice(
+        0,
+        state.userNotes.length,
+        ...state.userNotes.filter((note) => note.id !== payload)
+      );
     },
 
     visibleForm(state, payload) {
-      state.visibleForm = payload
+      state.visibleForm = payload;
     },
 
-    visibleNoteItem(state, payload) {
-      state.visibleNoteItem = payload
+    loading(state, payload) {
+      state.loading = payload;
     },
 
     // noteIsEmpty(state, payload) {
@@ -93,7 +96,7 @@ export const store = createStore({
     // 	}
     // },
 
-    createNote(state, payload) {
+    createNote(state) {
       const newNote = {
         title: state.noteTitle,
         text: state.noteText
@@ -131,7 +134,7 @@ export const store = createStore({
       state.noteTheme = 'dark'
       state.noteFont = 'glacial'
       state.noteIsFavourite = false
-    },
+    }
 
     // trashNote(state) {
     // 	const noteToTrash = findNote(state.userNotes, state.noteId);
@@ -165,7 +168,7 @@ export const store = createStore({
     // addFavouriteNotes(state) {
     //   state.favouriteNotes = state.userNotes.filter((note) => note.favourite)
     // }
-  },
+  }
 
   // actions: {
   //   moveToTrash({ state, commit }) {
