@@ -6,6 +6,7 @@ interface Note {
   title: string,
   text: string,
   id: number,
+  createdAt: string,
 }
 
 export default defineComponent({
@@ -34,23 +35,21 @@ export default defineComponent({
         .then(data => this.$store.commit("deleteNote", data.id))
         .catch((err) => console.log(err.message));
     },
-    openNote() {
-      // логика открытия ноута и передачи данных text title в инпуты
-      this.$store.commit("visibleNoteItem", true);
-    }
   },
   components: { TrashNote }
 })
 </script>
 
 <template>
-  <ul class="notes" v-if="!this.$store.state.visibleNoteItem">
-    <li v-for="note in notesFromStore" v-bind:key="note.id" class="note" @click="openNote">
-      <h3 class="note__title">{{ note.title }}</h3>
-      <p class="note__text">{{ note.text }}</p>
-      <button class="note__trash" @click="deleteNote(note.id)">
-        <TrashNote />
-      </button>
+  <ul class="notes">
+    <li v-for="note in notesFromStore" v-bind:key="note.id" class="note">
+      <RouterLink class="note__link" :to="{ name: 'note', params: { id: note.id } }">
+        <h3 class="note__title">{{ note.title }}</h3>
+        <p class="note__text">{{ note.text }}</p>
+        <button class="note__trash" @click="deleteNote(note.id)">
+          <TrashNote />
+        </button>
+      </RouterLink>
     </li>
   </ul>
 </template>
@@ -106,6 +105,10 @@ export default defineComponent({
     width: 100%;
   }
 
+  &__link {
+    text-decoration: none;
+  }
+
   &__title {
     color: var(--color-heading);
     font-size: 2rem;
@@ -140,6 +143,7 @@ export default defineComponent({
     @media screen and (max-width: 768px) {
       font-size: 1rem;
       height: 6.7rem;
+      -webkit-line-clamp: 4;
     }
   }
 

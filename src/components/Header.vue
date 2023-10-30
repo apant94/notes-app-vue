@@ -3,7 +3,6 @@ export default {
   name: 'HeaderItem',
   methods: {
     showForm() {
-      this.$store.commit("noteIsNew", true);
       this.$store.commit("visibleForm", true);
     }
   },
@@ -45,7 +44,7 @@ export default {
     transition: all 0.2s;
 
     &:hover {
-      animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;
+      animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
     }
   }
 
