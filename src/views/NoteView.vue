@@ -2,6 +2,7 @@
 import NavigationMenu from '../components/NavigationMenu.vue'
 import NoteItem from '@/components/NoteItem.vue';
 import Loader from '@/components/Loader.vue';
+import Success from '@/components/Success.vue';
 </script>
 
 <template>
@@ -9,6 +10,7 @@ import Loader from '@/components/Loader.vue';
     <NavigationMenu />
     <NoteItem>
       <Loader />
+      <Success />
     </NoteItem>
   </main>
 </template>

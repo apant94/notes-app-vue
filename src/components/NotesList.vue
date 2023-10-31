@@ -41,7 +41,8 @@ export default defineComponent({
 </script>
 
 <template>
-  <ul class="notes">
+  <slot></slot>
+  <ul class="notes" v-if="!this.$store.state.loading">
     <li v-for="note in notesFromStore" v-bind:key="note.id" class="note">
       <RouterLink class="note__link" :to="{ name: 'note', params: { id: note.id } }">
         <h3 class="note__title">{{ note.title }}</h3>

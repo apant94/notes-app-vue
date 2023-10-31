@@ -12,7 +12,6 @@ export default {
   data() {
     return {
       note: {} as Note,
-      success: false as boolean,
       text: '' as string,
     };
   },
@@ -27,9 +26,11 @@ export default {
         body: JSON.stringify({ text: this.text })
       })
         .then((res) => res.json())
-        .then((data) => console.log(data))
-        .catch((err) => console.log(err.message))
-        .finally(() => (this.success = true));
+        .then(() => this.$store.commit('success', true))
+        .then(() => setTimeout(() => {
+          this.$store.commit('success', false)
+        }, 3000))
+        .catch((err) => console.log(err.message));
     }
   },
   mounted() {
@@ -45,16 +46,15 @@ export default {
 </script>
 
 <template>
-  <form class="noteitem" @submit.prevent="editNote">
+  <form class="noteitem" @submit.prevent="editNote" name="editForm">
     <!-- <div v-if="loading" class="loader"></div> -->
     <slot></slot>
     <h2 v-if="!this.$store.state.loading" class="noteitem__title">{{ note.title }}</h2>
     <textarea v-if="!this.$store.state.loading" class="noteitem__text" :value="text" @input="event => text = (event.target as HTMLInputElement).value"></textarea>
-    <div class="noteitem__wrapper">
+    <div class="noteitem__wrapper" v-if="!this.$store.state.loading">
       <button class="noteitem__btn" @click.prevent="$router.back()">Назад</button>
       <button type="submit" class="noteitem__btn">Сохранить</button>
     </div>
-    <p class="noteitem__success" v-if="success">Заметочка изменена</p>
   </form>
 </template>
 
@@ -128,16 +128,21 @@ export default {
   &__text {
     padding: 1rem;
     height: fit-content;
-    min-height: 18rem;
+    min-height: 60vh;
     background: var(--color-background);
     border-radius: 6px;
     z-index: 5;
     border: 1px solid var(--color-green);
     color: var(--color-text);
     resize: vertical;
+    font-size: 1.3rem;
 
     &:focus-visible {
       outline: 1px solid var(--color-green);
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 1rem;
     }
   }
 
@@ -146,12 +151,17 @@ export default {
     gap: 2rem;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-width: 768px) {
+      gap: 1rem;
+    }
   }
 
   &__btn {
     min-height: 3rem;
-    min-width: 10rem;
+    width: 10rem;
     padding: 1rem;
+    font-weight: 600;
     background-color: var(--color-green);
     border: 1px solid var(--color-green);
     border-radius: 6px;
@@ -160,10 +170,17 @@ export default {
     transition: all .2s linear;
     text-transform: uppercase;
     font-family: "OpenSans", Arial, Helvetica, sans-serif;
+    font-size: 1.1rem;
 
     &:hover {
       animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
       opacity: .8;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 7rem;
+      font-weight: 500;
+      font-size: .8rem;
     }
   }
 
