@@ -7,6 +7,7 @@ export const store = createStore({
       userNotes: [],
       visibleForm: false,
       loading: false,
+      success: false,
       // favouriteNotes: [],
       // trashedNotes: [],
       // isNoteEmpty: true,
@@ -44,6 +45,10 @@ export const store = createStore({
 
     loading(state, payload) {
       state.loading = payload;
+    },
+
+    success(state, payload) {
+      state.success = payload
     },
 
     // noteIsEmpty(state, payload) {
