@@ -1,46 +1,36 @@
 # notes-app-vue
 
-This template should help get you started developing with Vue 3 in Vite.
+Приложение заметок Vue3 + Vuex
 
-## Recommended IDE Setup
+## Ссылки:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- [Сайт](https://taupe-selkie-1f7699.netlify.app/)
 
-## Type Support for `.vue` Imports in TS
+## Функционал:
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+- Адаптивная, резиновая верстка
+- Создание, редактирование и удаление заметок при помощи стейт-менеджера и api 
+- Фильтрация данных при вводе в строку поиска
+- Возможность добавить заметки в избранное и корзину
+- Анимация
+- Работа со стором
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+## Планы по улучшению:
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+- Настроить наглядную валидацию форм
+- Реализовать авторизацию
+- Наладить визуализацию обработки ошибок
 
-## Customize configuration
+## Технологии:
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- HTML5
+- SCSS
+- Vue3
+- Vuex
+- MockAPI
 
-## Project Setup
+## Инструкция:
 
-```sh
-npm install
-```
+- npm run dev (Запускает dev-server)
+- npm run build (Собирает проект в режиме разработки)
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
