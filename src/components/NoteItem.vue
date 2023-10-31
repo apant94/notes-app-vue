@@ -5,6 +5,7 @@ interface Note {
   text: string,
   id: number,
   createdAt: string,
+  isLiked: boolean,
 }
 
 export default {
@@ -20,10 +21,17 @@ export default {
       this.$store.commit("visibleNoteItem", false);
     },
     editNote() {
+      const newNote = {
+        text: this.text,
+        id: this.note.id,
+        createdAt: this.note.createdAt,
+        title: this.note.title,
+        isLiked: this.note.isLiked
+      };
       fetch(`https://6536b157bb226bb85dd28259.mockapi.io/api/v1/notes/${Number(this.$route.params.id)}`, {
-        method: 'PATCH',
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: this.text })
+        body: JSON.stringify(newNote)
       })
         .then((res) => res.json())
         .then(() => this.$store.commit('success', true))
@@ -31,7 +39,7 @@ export default {
           this.$store.commit('success', false)
         }, 3000))
         .catch((err) => console.log(err.message));
-    }
+    },
   },
   mounted() {
     this.$store.commit('loading', true);
@@ -50,7 +58,8 @@ export default {
     <!-- <div v-if="loading" class="loader"></div> -->
     <slot></slot>
     <h2 v-if="!this.$store.state.loading" class="noteitem__title">{{ note.title }}</h2>
-    <textarea v-if="!this.$store.state.loading" class="noteitem__text" :value="text" @input="event => text = (event.target as HTMLInputElement).value"></textarea>
+    <textarea v-if="!this.$store.state.loading" class="noteitem__text" :value="text"
+      @input="event => text = (event.target as HTMLInputElement).value"></textarea>
     <div class="noteitem__wrapper" v-if="!this.$store.state.loading">
       <button class="noteitem__btn" @click.prevent="$router.back()">Назад</button>
       <button type="submit" class="noteitem__btn">Сохранить</button>
