@@ -37,7 +37,7 @@ export default {
         .then(() => this.$store.commit('success', true))
         .then(() => setTimeout(() => {
           this.$store.commit('success', false)
-        }, 3000))
+        }, 2900))
         .catch((err) => console.log(err.message));
     },
   },

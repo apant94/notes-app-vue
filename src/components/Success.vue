@@ -25,9 +25,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: fadeLeft, fadeDown;
-  animation-duration: .5s, .5s;
-  animation-delay: 0s, 2.5s;
+  animation: fadeLeft, fadeRight;
+  animation-duration: .3s, .3s;
+  animation-delay: 0s, 2.7s;
   z-index: 50;
 
   &__text {
