@@ -5,6 +5,7 @@ import TrashNote from './icons/TrashNote.vue';
 interface Note {
   title: string,
   text: string,
+  theme: string,
   id: number,
   createdAt: string,
 }
@@ -35,6 +36,10 @@ export default defineComponent({
         .then(data => this.$store.commit("deleteNote", data.id))
         .catch((err) => console.log(err.message));
     },
+    selectedTheme(theme: string) {
+      console.log(theme);
+      return theme;
+    },
   },
   components: { TrashNote }
 })
@@ -43,14 +48,14 @@ export default defineComponent({
 <template>
   <slot></slot>
   <ul class="notes" v-if="!this.$store.state.loading">
-    <li v-for="note in notesFromStore" v-bind:key="note.id" class="note">
+    <li v-for="note in notesFromStore" v-bind:key="note.id" class="note" :class="selectedTheme(note.theme)">
       <RouterLink class="note__link" :to="{ name: 'note', params: { id: note.id } }">
         <h3 class="note__title">{{ note.title }}</h3>
         <p class="note__text">{{ note.text }}</p>
-        <button class="note__trash" @click="deleteNote(note.id)">
-          <TrashNote />
-        </button>
       </RouterLink>
+      <button class="note__trash" @click="deleteNote(note.id)">
+        <TrashNote />
+      </button>
     </li>
   </ul>
 </template>

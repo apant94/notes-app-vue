@@ -2,7 +2,6 @@
 import { RouterView } from 'vue-router'
 import Header from './components/Header.vue';
 import Form from './components/Form.vue';
-// import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
@@ -11,6 +10,4 @@ import Form from './components/Form.vue';
   <RouterView />
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -1,11 +1,15 @@
 <script lang="ts">
+import PaletteIcon from './icons/PaletteIcon.vue';
+import Palette from './Palette.vue';
+
 export default {
   name: 'FormWithSubmit',
   data() {
     return {
       title: '',
       text: '',
-    }
+      theme: ''
+    };
   },
   methods: {
     hideForm() {
@@ -16,8 +20,7 @@ export default {
       this.text = '';
     },
     addNote() {
-      const newNote = { title: this.title, text: this.text }
-
+      const newNote = { title: this.title, text: this.text, theme: this.theme };
       fetch("https://6536b157bb226bb85dd28259.mockapi.io/api/v1/notes", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -28,14 +31,25 @@ export default {
         .catch((err) => console.log(err.message));
       this.hideForm();
       this.clearForm();
-    }
+    },
+    togglePalette() {
+      this.$store.commit("visiblePalette", !this.$store.state.visiblePalette);
+    },
+    onSetTheme(value: string) {
+      this.theme = value;
+    },
+    selectedTheme(theme: string) {
+      console.log(theme);
+      return theme;
+    },
   },
+  components: { PaletteIcon, Palette }
 }
 </script>
 
 <template>
   <div class="layout" v-if="this.$store.state.visibleForm">
-    <form class="form" @submit.prevent="addNote" name="addForm">
+    <form class="form" :class="selectedTheme(theme)" @submit.prevent="addNote" name="addForm">
       <div class="form__close" @click="hideForm">
         <svg class="form__close-fill" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 50 50">
           <path
@@ -46,7 +60,13 @@ export default {
       <h2 class="form__title">Создать заметочку</h2>
       <input type="text" class="form__input-title" v-model="title" placeholder="заголовок">
       <textarea name="text" class="form__input-text" v-model="text" placeholder="заметка"></textarea>
-      <button type="submit" class="form__btn" :disabled="text === '' || title === ''">Оки</button>
+      <div class="form__btn-wrapper"><button type="submit" class="form__btn"
+          :disabled="text === '' || title === ''">Оки</button>
+        <button class="form__palette-btn" @click.prevent="togglePalette">
+          <PaletteIcon />
+        </button>
+      </div>
+      <Palette @setTheme="onSetTheme" />
     </form>
   </div>
 </template>
@@ -191,6 +211,12 @@ export default {
     }
   }
 
+  &__btn-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
   &__btn {
     height: 3rem;
     border: 1px solid var(--color-text);
@@ -201,7 +227,7 @@ export default {
     text-transform: uppercase;
     cursor: pointer;
     transition: all .2s linear;
-    padding: 0;
+    padding: 10px 2rem;
     font-size: 1rem;
     font-family: 'PressStart2P', Arial, Helvetica, sans-serif;
 
@@ -219,6 +245,23 @@ export default {
       font-size: .7rem;
       height: 2rem;
       max-width: 100px;
+    }
+  }
+
+  &__palette-btn {
+    height: 3rem;
+    background-color: transparent;
+    border: none;
+    width: 3rem;
+    cursor: pointer;
+
+    & svg {
+      fill: var(--color-text);
+      transition: all .5s linear;
+    }
+
+    &:hover svg {
+      fill: var(--color-violet);
     }
   }
 }

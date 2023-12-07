@@ -28,6 +28,7 @@
   --color-background-mute: var(--vt-c-white-mute);
 
   --color-green: #a5e010;
+  --color-violet: rgb(150, 126, 255);
 
   --color-border: var(--vt-c-divider-light-2);
   --color-border-hover: var(--vt-c-divider-light-1);

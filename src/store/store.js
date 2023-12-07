@@ -6,8 +6,10 @@ export const store = createStore({
     return {
       userNotes: [],
       visibleForm: false,
+      visiblePalette: false,
       loading: false,
       success: false,
+      noteTheme: '',
       // favouriteNotes: [],
       // trashedNotes: [],
       // isNoteEmpty: true,
@@ -16,7 +18,6 @@ export const store = createStore({
       // noteTitle: '',
       // noteText: '',
       // noteImages: [],
-      // noteTheme: 'dark'
       // noteFont: "glacial",
       // noteIsFavourite: false
     }
@@ -43,12 +44,20 @@ export const store = createStore({
       state.visibleForm = payload;
     },
 
+    visiblePalette(state, payload) {
+      state.visiblePalette = payload;
+    },
+
     loading(state, payload) {
       state.loading = payload;
     },
 
     success(state, payload) {
       state.success = payload
+    },
+
+    setNoteTheme(state, payload) {
+      state.noteTheme = payload
     },
 
     // noteIsEmpty(state, payload) {
@@ -69,10 +78,6 @@ export const store = createStore({
 
     // addNoteImages(state, payload) {
     //   state.noteImages.push(payload)
-    // },
-
-    // setNoteTheme(state, payload) {
-    //   state.noteTheme = payload
     // },
 
     // setNoteFont(state, payload) {
