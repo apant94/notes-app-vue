@@ -5,6 +5,7 @@ declare module '@vue/runtime-core' {
     title: string,
     text: string,
     id: number,
+    theme: string,
     createdAt: string,
     isLiked: boolean,
   }
@@ -12,6 +13,10 @@ declare module '@vue/runtime-core' {
   interface State {
     userNotes: Array<Note>,
     visibleForm: boolean,
+    visiblePalette: boolean,
+    loading: boolean,
+    success: boolean,
+    noteTheme: string,
   }
 
   // provide typings for `this.$store`
