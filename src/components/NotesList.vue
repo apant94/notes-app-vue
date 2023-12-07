@@ -47,10 +47,10 @@ export default defineComponent({
       <RouterLink class="note__link" :to="{ name: 'note', params: { id: note.id } }">
         <h3 class="note__title">{{ note.title }}</h3>
         <p class="note__text">{{ note.text }}</p>
-        <button class="note__trash" @click="deleteNote(note.id)">
-          <TrashNote />
-        </button>
       </RouterLink>
+      <button class="note__trash" @click="deleteNote(note.id)">
+        <TrashNote />
+      </button>
     </li>
   </ul>
 </template>
