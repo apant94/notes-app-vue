@@ -1,6 +1,7 @@
 # notes-app-vue
 
 Приложение заметок Vue3 + Vuex
+<img width="1680" alt="Screenshot 2023-12-07 at 21 02 56" src="https://github.com/apant94/notes-app-vue/assets/103651974/74d0e427-29b4-4970-a1ef-2d1fe5c8673b">
 
 ## Ссылки:
 
