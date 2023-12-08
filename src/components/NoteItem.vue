@@ -55,7 +55,6 @@ export default {
 
 <template>
   <form class="noteitem" @submit.prevent="editNote" name="editForm">
-    <!-- <div v-if="loading" class="loader"></div> -->
     <slot></slot>
     <h2 v-if="!this.$store.state.loading" class="noteitem__title">{{ note.title }}</h2>
     <textarea v-if="!this.$store.state.loading" class="noteitem__text" :value="text"
