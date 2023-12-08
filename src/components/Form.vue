@@ -6,9 +6,9 @@ export default {
   name: 'FormWithSubmit',
   data() {
     return {
-      title: '',
-      text: '',
-      theme: ''
+      title: '' as string,
+      text: '' as string,
+      theme: '' as string
     };
   },
   methods: {
