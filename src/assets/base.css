@@ -96,7 +96,7 @@ body {
   scrollbar-width: none;
 }
 
-.main ::-webkit-scrollbar {
+.main::-webkit-scrollbar {
   display: none;
 }
 
