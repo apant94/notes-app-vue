@@ -1,19 +1,25 @@
 <script lang="ts">
+import PaletteIcon from './icons/PaletteIcon.vue';
+import Palette from './Palette.vue';
+
 
 interface Note {
   title: string,
   text: string,
   id: number,
+  theme: string,
   createdAt: string,
   isLiked: boolean,
 }
 
 export default {
   name: 'NoteItem',
+  components: { PaletteIcon, Palette },
   data() {
     return {
       note: {} as Note,
       text: '' as string,
+      theme: '' as string,
     };
   },
   methods: {
@@ -25,6 +31,7 @@ export default {
         text: this.text,
         id: this.note.id,
         createdAt: this.note.createdAt,
+        theme: this.theme,
         title: this.note.title,
         isLiked: this.note.isLiked
       };
@@ -39,6 +46,15 @@ export default {
           this.$store.commit('success', false)
         }, 2900))
         .catch((err) => console.log(err.message));
+    },
+    togglePalette() {
+      this.$store.commit("visiblePalette", !this.$store.state.visiblePalette);
+    },
+    onSetTheme(value: string) {
+      this.theme = value;
+    },
+    selectedTheme(initValue: string, newValue: string) {
+      return !newValue ? initValue : newValue;
     },
   },
   mounted() {
@@ -57,11 +73,15 @@ export default {
   <form class="noteitem" @submit.prevent="editNote" name="editForm">
     <slot></slot>
     <h2 v-if="!this.$store.state.loading" class="noteitem__title">{{ note.title }}</h2>
-    <textarea v-if="!this.$store.state.loading" class="noteitem__text" :value="text"
+    <textarea v-if="!this.$store.state.loading" class="noteitem__text" :class="selectedTheme(note.theme, theme)" :value="text"
       @input="event => text = (event.target as HTMLInputElement).value"></textarea>
     <div class="noteitem__wrapper" v-if="!this.$store.state.loading">
       <button class="noteitem__btn" @click.prevent="$router.back()">Назад</button>
       <button type="submit" class="noteitem__btn">Сохранить</button>
+      <button class="noteitem__palette-btn" @click.prevent="togglePalette">
+        <PaletteIcon />
+      </button>
+      <Palette @setTheme="onSetTheme" />
     </div>
   </form>
 </template>
@@ -192,5 +212,26 @@ export default {
     }
   }
 
+  &__palette-btn {
+    height: 3rem;
+    background-color: transparent;
+    border: none;
+    width: 3rem;
+    cursor: pointer;
+
+    & svg {
+      fill: var(--color-text);
+      transition: all .5s linear;
+    }
+
+    &:hover svg {
+      fill: var(--color-violet);
+    }
+
+    @media screen and (max-width: 768px) {
+      height: 2.4rem;
+      width: 2.4rem;
+    }
+  }
 }
 </style>
