@@ -263,6 +263,11 @@ export default {
     &:hover svg {
       fill: var(--color-violet);
     }
+
+    @media screen and (max-width: 768px) {
+      height: 2.4rem;
+      width: 2.4rem;
+    }
   }
 }
 </style>

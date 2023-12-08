@@ -63,13 +63,26 @@ export default {
   right: 1rem;
   z-index: 10;
 
+  @media screen and (max-width: 768px) {
+    bottom: 4rem;
+    right: 5rem;
+  }
+
+  @media screen and (max-width: 425px) {
+    bottom: 4rem;
+    right: .2rem;
+  }
+
   &__container {
     background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     padding: 1rem;
     border-radius: 10px;
+
+    @media screen and (max-width: 768px) {
+      padding: .8rem;
+    }
 
     & button {
       height: 2rem;
@@ -78,6 +91,16 @@ export default {
       position: relative;
       cursor: pointer;
       border: none;
+
+      @media screen and (max-width: 768px) {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
+      @media screen and (max-width: 425px) {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
 
       &::before {
         content: "";
@@ -108,6 +131,14 @@ export default {
       display: flex;
       align-items: center;
       gap: 1rem;
+
+      @media screen and (max-width: 768px) {
+        gap: .8rem;
+      }
+
+      @media screen and (max-width: 425px) {
+        gap: .6rem;
+      }
     }
 
     .theme-buttons {
@@ -117,6 +148,14 @@ export default {
     p {
       color: #fff;
       font-size: 1.2rem;
+
+      @media screen and (max-width: 768px) {
+        font-size: 1rem;
+      }
+
+      @media screen and (max-width: 425px) {
+        font-size: .8rem;
+      }
     }
   }
 
@@ -136,6 +175,14 @@ export default {
     @media screen and (max-width: 768px) {
       width: 1.5rem;
       height: 1.5rem;
+    }
+
+    @media screen and (max-width: 425px) {
+      top: .5rem;
+      right: .5rem;
+      width: 1rem;
+      height: 1rem;
+      transform: translateY(-40%);
     }
   }
 
