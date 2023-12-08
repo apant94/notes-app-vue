@@ -179,6 +179,7 @@ export default {
     gap: 2rem;
     justify-content: center;
     align-items: center;
+    position: relative;
 
     @media screen and (max-width: 768px) {
       gap: 1rem;
